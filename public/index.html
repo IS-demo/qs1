@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Add your hotel · intentStay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell" id="app">
+
+  <header class="topbar">
+    <span class="logo">intent<b>Stay</b></span>
+    <div class="right">
+      <span class="save">Save &amp; exit</span>
+      <div class="avatar">PP</div>
+    </div>
+  </header>
+
+  <div class="progress-track" id="progressTrack"><div class="progress-bar" id="progressBar"></div></div>
+
+  <main class="main">
+    <div class="content">
+      <div class="step-label" id="stepLabel"></div>
+      <div id="stepContent"></div>
+    </div>
+  </main>
+
+  <footer class="footer" id="footer">
+    <div class="left">
+      <button class="btn-back" id="backBtn" type="button">&larr; Back</button>
+      <span class="autosave-note" id="autosaveNote">Your progress saves automatically</span>
+    </div>
+    <button class="btn-cta" id="ctaBtn" type="button"></button>
+  </footer>
+
+  <button class="preview-toggle" id="previewToggle" type="button">PREVIEW</button>
+
+  <div class="preview-panel" id="previewPanel" hidden></div>
+
+</div>
+<script src="app.js"></script>
+</body>
+</html>
