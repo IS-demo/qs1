@@ -61,7 +61,7 @@
   var STEP1_PREVIEW_FIELDS = ['hotelName', 'location', 'propertyType', 'address'];
 
   var state = {
-    step: 1, preview: false, submitting: false, submitError: '', stepError: '',
+    step: 1, preview: false, submitting: false, submitError: '', stepError: '', submittedId: '',
     hotelName: '', location: '', propertyType: '', address: '', rooms: '', website: '',
     offers: [], offerDraft: '',
     archetype: '', tones: [],
@@ -315,7 +315,9 @@
       '</div>' +
       '<div class="done-actions">' +
         '<button type="button" class="btn-ghost" data-action="restart">Add another hotel</button>' +
-        '<button type="button" class="btn-cta">Go to dashboard</button>' +
+        (state.submittedId
+          ? '<a class="btn-cta" style="display:inline-block;text-decoration:none;text-align:center" href="/submissions/' + esc(state.submittedId) + '.csv" download>Download answers (CSV)</a>'
+          : '') +
       '</div>' +
     '</div>';
   }
@@ -428,7 +430,7 @@
   }
   function restart() {
     Object.assign(state, {
-      step: 1, preview: false, submitting: false, submitError: '', stepError: '',
+      step: 1, preview: false, submitting: false, submitError: '', stepError: '', submittedId: '',
       hotelName: '', location: '', propertyType: '', address: '', rooms: '', website: '',
       offers: [], offerDraft: '',
       archetype: '', tones: [],
@@ -485,8 +487,9 @@
     }).then(function (res) {
       if (!res.ok) return res.json().then(function (j) { throw new Error(j.error || 'save_failed'); });
       return res.json();
-    }).then(function () {
+    }).then(function (json) {
       state.submitting = false;
+      state.submittedId = json.id;
       state.step = 6;
       render();
       document.querySelector('.main').scrollTop = 0;

@@ -1,7 +1,14 @@
 const path = require("path");
 const crypto = require("crypto");
 const express = require("express");
-const { saveSubmission, MASTER_CSV_PATH, SUBMISSIONS_DIR } = require("./lib/storage");
+const {
+  saveSubmission,
+  getSubmissionById,
+  submissionToCsv,
+  slugify,
+  MASTER_CSV_PATH,
+  SUBMISSIONS_DIR,
+} = require("./lib/storage");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -83,6 +90,22 @@ app.post("/api/submit", (req, res) => {
     console.error("Failed to save submission", err);
     res.status(500).json({ error: "save_failed" });
   }
+});
+
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+// One person's own answers, right after they submit — keyed by their unguessable
+// submission id, not the admin token. Does not expose any other client's data.
+app.get("/submissions/:id.csv", (req, res) => {
+  const id = req.params.id;
+  if (!UUID_RE.test(id)) return res.status(400).send("Bad id");
+  const record = getSubmissionById(id);
+  if (!record) return res.status(404).send("Not found");
+  const csv = submissionToCsv(record);
+  const filename = `${slugify(record.basics && record.basics.hotelName)}-answers.csv`;
+  res.setHeader("Content-Type", "text/csv; charset=utf-8");
+  res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
+  res.send(csv);
 });
 
 function requireAdmin(req, res, next) {

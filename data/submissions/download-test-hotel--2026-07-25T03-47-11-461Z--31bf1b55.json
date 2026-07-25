@@ -1,0 +1,47 @@
+{
+  "id": "31bf1b55-31b1-48c9-b88b-5dd0e728db77",
+  "submittedAt": "2026-07-25T03:47:11.461Z",
+  "basics": {
+    "hotelName": "Download Test Hotel",
+    "location": "",
+    "propertyType": "",
+    "address": "",
+    "rooms": "",
+    "website": ""
+  },
+  "offers": {
+    "selected": [],
+    "custom": []
+  },
+  "voice": {
+    "archetype": "",
+    "tones": [],
+    "dimensions": {
+      "formal": 2,
+      "serious": 2,
+      "reserved": 2,
+      "factual": 2
+    },
+    "feelings": [],
+    "differentiator": "",
+    "love": [],
+    "banned": [],
+    "tagline": "",
+    "voiceStatement": ""
+  },
+  "audience": {
+    "guests": [],
+    "guestsCustom": [],
+    "ages": [],
+    "origins": [],
+    "originsCustom": [],
+    "interests": [],
+    "interestsCustom": [],
+    "trip": []
+  },
+  "monitoring": {
+    "radius": "",
+    "topics": [],
+    "topicsCustom": []
+  }
+}
